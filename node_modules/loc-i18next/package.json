@@ -1,0 +1,66 @@
+{
+  "name": "loc-i18next",
+  "version": "0.1.5",
+  "description": "Smart selectors to be used with i18next",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb": "10.0.1",
+    "i18next": "^3.4.3",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-requirejs": "^1.1.0",
+    "mkdirp": "0.5.1",
+    "rimraf": "^2.5.4",
+    "rollup": "0.34.10",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-uglify": "^1.0.1",
+    "yargs": "^5.0.0"
+  },
+  "scripts": {
+    "clean": "rimraf dist && mkdirp dist",
+    "copy": "cp ./dist/umd/loc-i18next.min.js ./loc-i18next.min.js && cp ./dist/umd/loc-i18next.js ./loc-i18next.js",
+    "build:es": "BABEL_ENV=jsnext babel src --out-dir dist/es",
+    "build:cjs": "babel src --out-dir dist/commonjs",
+    "build:umd": "rollup -c rollup.config.js --format umd && rollup -c rollup.config.js --format umd --uglify",
+    "build:amd": "rollup -c rollup.config.js --format amd && rollup -c rollup.config.js --format umd --uglify",
+    "build:iife": "rollup -c rollup.config.js --format iife && rollup -c rollup.config.js --format iife --uglify",
+    "build": "npm run clean && npm run build:cjs && npm run build:es && npm run build:umd && npm run copy",
+    "preversion": "npm run build && git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mthh/loc-i18next.git"
+  },
+  "author": "mthh",
+  "contributors": [
+    {
+      "name": "NOtherDev"
+    },
+    {
+      "name": "thjungers"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mthh/loc-i18next/issues"
+  },
+  "homepage": "https://github.com/mthh/loc-i18next",
+  "keywords": [
+    "i18next",
+    "i18next-plugin",
+    "internationalization",
+    "i18n",
+    "translation",
+    "localization",
+    "l10n"
+  ]
+}
